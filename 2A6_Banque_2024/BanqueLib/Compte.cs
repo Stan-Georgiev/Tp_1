@@ -32,8 +32,7 @@ namespace BanqueLib
         public StatutCompte statut => _statut;
         public string detenteur => _detenteur;
         #endregion
-
-
+        #region ----- setters -----
         public void SetNomDetenteur (string detenteur) 
         {
             if (String.IsNullOrWhiteSpace(detenteur))
@@ -43,9 +42,8 @@ namespace BanqueLib
             detenteur = detenteur.Trim();
             _detenteur = detenteur;
         }
-
-        
-
+        #endregion
+        #region ----- Methodes -----
         public string Description()
         {
             string affiche = "";
@@ -94,7 +92,7 @@ namespace BanqueLib
                 return false;
             }
         }
-
+        #endregion
         #region ----- méthodes calculantes -----
 
         public decimal Déposer(decimal montant)
