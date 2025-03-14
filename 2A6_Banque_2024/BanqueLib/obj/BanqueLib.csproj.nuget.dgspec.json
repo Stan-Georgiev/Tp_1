@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\2494186\\source\\repos\\2A6_Banque_2024\\BanqueLib\\BanqueLib.csproj": {}
+    "C:\\Users\\2494186\\Source\\Repos\\Tp_1\\2A6_Banque_2024\\BanqueLib\\BanqueLib.csproj": {}
   },
   "projects": {
-    "C:\\Users\\2494186\\source\\repos\\2A6_Banque_2024\\BanqueLib\\BanqueLib.csproj": {
+    "C:\\Users\\2494186\\Source\\Repos\\Tp_1\\2A6_Banque_2024\\BanqueLib\\BanqueLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\2494186\\source\\repos\\2A6_Banque_2024\\BanqueLib\\BanqueLib.csproj",
+        "projectUniqueName": "C:\\Users\\2494186\\Source\\Repos\\Tp_1\\2A6_Banque_2024\\BanqueLib\\BanqueLib.csproj",
         "projectName": "BanqueLib",
-        "projectPath": "C:\\Users\\2494186\\source\\repos\\2A6_Banque_2024\\BanqueLib\\BanqueLib.csproj",
+        "projectPath": "C:\\Users\\2494186\\Source\\Repos\\Tp_1\\2A6_Banque_2024\\BanqueLib\\BanqueLib.csproj",
         "packagesPath": "C:\\Users\\2494186\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\2494186\\source\\repos\\2A6_Banque_2024\\BanqueLib\\obj\\",
+        "outputPath": "C:\\Users\\2494186\\Source\\Repos\\Tp_1\\2A6_Banque_2024\\BanqueLib\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
