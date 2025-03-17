@@ -2,94 +2,101 @@
 
 namespace BanqueLib
 {
-    public enum StatutCompte { Ok, Gele, Vide}
+    public enum StatutCompte { Ok, Gelé, Vide}
     public class Compte
     {
 
         #region ----- champs -----
 
-        private readonly int _numero;
-        private string _detenteur;
-        private decimal _solde;
-        private StatutCompte _statut;
-        private bool _estGele;
+        private readonly int _Numéro;
+        private string _Détenteur;
+        private decimal _Solde;
+        private StatutCompte _Statut;
+        private bool _EstGelé;
 
         #endregion
         #region ----- constructeurs -----
-        public Compte(int numero, string detenteur, decimal solde, StatutCompte statut, bool estGele)
+        public Compte(int Numéro = 1, string Détenteur = "", decimal Solde = 0, StatutCompte Statut = StatutCompte.Ok, bool EstGelé = false)
         {
-            _numero = numero;
-            decimal.Round(solde, 2);
-            _solde = solde;
-            _statut = statut;
-           _estGele = estGele;
+            _Numéro = Numéro;
+            _Détenteur = Détenteur;
+            decimal.Round(Solde, 2);
+            _Solde = Solde;
+            _Statut = Statut;
+           _EstGelé = EstGelé;
+
+            var arrondi = decimal.Round(Solde, 2);
+
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(Numéro);
+            ArgumentException.ThrowIfNullOrWhiteSpace(Détenteur);
+            ArgumentOutOfRangeException.ThrowIfNegative(Solde);
+
+            
         }
 
         #endregion
         #region ----- getters -----
-        public int numero => _numero;
-        public decimal solde => _solde;
-        public StatutCompte statut => _statut;
-        public string detenteur => _detenteur;
+        public int Numéro => _Numéro;
+        public decimal Solde => _Solde;
+        public StatutCompte Statut => _Statut;
+        public string Détenteur => _Détenteur;
+        public bool EstGelé => _EstGelé;
         #endregion
         #region ----- setters -----
-        public void SetNomDetenteur (string detenteur) 
+        public void SetDétenteur (string Détenteur = "") 
         {
-            if (String.IsNullOrWhiteSpace(detenteur))
-            {
-                throw new ArgumentNullException();
-            }
-            detenteur = detenteur.Trim();
-            _detenteur = detenteur;
+            ArgumentException.ThrowIfNullOrWhiteSpace(Détenteur);
+            Détenteur = Détenteur.Trim();
+            _Détenteur = Détenteur;
         }
         #endregion
         #region ----- Methodes -----
         public string Description()
         {
             string affiche = "";
-            affiche += $"[SG] ************************************************************************\n";
-            affiche += $"[SG] *                                                                      *\n";
-            affiche += $"[SG] *               Compte({numero})                                       *\n";
-            affiche += $"[SG] *                De({detenteur})                                       *\n";
-            affiche += $"[SG] *                Solde({solde})                                        *\n";
-            affiche += $"[SG] *                Statut({statut})                                      *\n";
-            affiche += $"[SG] ************************************************************************\n";
+            affiche += $"[SG] **********************************************************\n";
+            affiche += $"[SG] *                                                        *\n";
+            affiche += $"[SG] *  Compte: {Numéro,-12}                                  *\n";
+            affiche += $"[SG] *  De: {Détenteur,-19}                               *\n";
+            affiche += $"[SG] *  Solde: {Solde, -13}                                  *\n";
+            affiche += $"[SG] *  Statut: {Statut, -13}                                 *\n";
+            affiche += $"[SG] **********************************************************\n";
             return affiche;
         }
         
-        public bool PeutDéposer (decimal montant)
+        public bool PeutDéposer (decimal montant = 1)
         {
             var arrondi = decimal.Round(montant, 2);
 
-            if (montant!= arrondi || montant <= 0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }        
 
-            if (_estGele = true)
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(montant);
+            ArgumentOutOfRangeException.ThrowIfNotEqual(montant,arrondi);
+
+            if (_EstGelé == true)
             {
                 return false;
-            }
-
-            return true;
-        }
-
-        public bool PeutRetirer (decimal montant)
-        {
-            var arrondi = decimal.Round(montant, 2);
-
-            if (montant <= 0 || montant != arrondi)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            if (!_estGele)
-            {
-                return true;
             }
             else
             {
+                return true;
+            }
+
+        }
+
+        public bool PeutRetirer (decimal montant = 1)
+        {
+            var arrondi = decimal.Round(montant, 2);
+
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(montant);
+            ArgumentOutOfRangeException.ThrowIfNotEqual(montant, arrondi);
+
+            if (_EstGelé == true || montant > _Solde)
+            {
                 return false;
+            }
+            else
+            {
+                return true;
             }
         }
         #endregion
@@ -99,20 +106,18 @@ namespace BanqueLib
         {
             var arrondi = decimal.Round(montant, 2);
 
-            if (montant <= 0 || montant != arrondi)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(montant);
+            ArgumentOutOfRangeException.ThrowIfNotEqual(montant, arrondi);
 
             if (PeutDéposer(montant))
             {
-                _solde += montant;
-                return  _solde;
+                _Solde += montant;
+                return  _Solde;
 
             }
             else
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Déposer");
             }
         }
 
@@ -120,20 +125,18 @@ namespace BanqueLib
         {
             var arrondi = decimal.Round(Montant, 2);
 
-            if (Montant <= 0 || Montant != arrondi)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(Montant);
+            ArgumentOutOfRangeException.ThrowIfNotEqual(Montant, arrondi);
 
             if (PeutDéposer(Montant))
             {
-                _solde -= Montant;
-                return _solde;
+                _Solde -= Montant;
+                return _Solde;
 
             }
             else
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Montant");
             }
         }
 
@@ -142,34 +145,41 @@ namespace BanqueLib
 
         public decimal Vider()
         {
-            if (_statut != StatutCompte.Vide || _statut == StatutCompte.Gele)
+            if (_Solde == 0|| _Statut == StatutCompte.Gelé)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Vider");
             }
             else
             {
-                decimal montant = _solde;
-                _solde -= montant;
-                _statut = StatutCompte.Vide;
+                decimal montant = _Solde;
+                _Solde -= montant;
                 return montant;
             }          
         }
 
         public void Geler()
         {
-            if (_statut == StatutCompte.Gele)
+            if (_Statut == StatutCompte.Gelé)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Geler");
             }
-            else
+            _Statut = StatutCompte.Gelé;
+
+            if (_Statut == StatutCompte.Gelé)
             {
-                _statut = StatutCompte.Gele;
+                _EstGelé = true;
             }
         }
 
         public void Dégeler()
         {
-                _statut = StatutCompte.Gele;        
+            _Statut = StatutCompte.Ok;
+            _EstGelé = false; 
+
+            if (_Statut == StatutCompte.Ok)
+            {
+                throw new InvalidOperationException("Dégeler");
+            }
         }
 
 

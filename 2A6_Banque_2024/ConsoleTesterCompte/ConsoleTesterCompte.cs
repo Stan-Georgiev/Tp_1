@@ -33,7 +33,7 @@ while (true)
             Console.WriteLine(new Compte(1001, "Mme Création simple").Description());
             break;
         case '2':
-            Console.WriteLine(new Compte(1002, "         Mme Création avec solde        ", 8008.02m).Description());
+            Console.WriteLine(new Compte(1002, "Mme Création avec sold", 8008.02m).Description());
             break;
         case '3':
             Console.WriteLine(new Compte(1003, "Mme Création gelée", 1_111_111, StatutCompte.Gelé).Description());
