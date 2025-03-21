@@ -1,27 +1,30 @@
-﻿using BanqueLib;
+﻿using System.Numerics;
+using BanqueLib;
 
+int random = Random.Shared.Next(100, 999);
+int random2 = Random.Shared.Next(1, 99);
+var compte = new Compte(random,"---",0,StatutCompte.Ok,false);
 while (true)
 {
     Console.Clear();
-    Console.WriteLine("""
+    Console.WriteLine(compte.Description());
+    Console.WriteLine(
+        $"""       
     
      TESTER COMPTE
 
-     1 - Création d'un compte simple (solde 0$)
-     2 - Création d'un compte avec solde
-     3 - Création d'un compte gelé
-     4 - Déposer
-     5 - Retirer
-     6 - Vider
-     7 - Geler et dégeler
-     8 - Getters
-     9 - Setter
-     a - Exceptions (constructeur)
-     b - Exceptions (setter)
-     c - Exceptions (peutdéposer et peutretirer)
-     d - Exceptions (déposer et retirer)
-     e - Exceptions (geler, dégeler et vider)
-     q - Quitter
+     1 - Modifier détenteur
+     2 - Peut déposer
+     3 - Peut retirer
+     4 - Peut retirer(Montant)
+     5 - Déposer (montant)
+     6 - Retirer (montant)
+     7 - Vider
+     8 - Geler
+     9 - Dégeler
+     a - Quitter
+     b - reset
+     
 
      Votre choix, stanislav Georgiev ?
 
@@ -30,67 +33,72 @@ while (true)
     switch (Console.ReadKey(true).KeyChar)
     {
         case '1':
-            Console.WriteLine(new Compte(1001, "Mme Création simple").Description());
+            compte.SetDétenteur($"Stanislav Georgiev {random2}");
+            Console.WriteLine($"Détenteur modifié pour: {$"{compte.Détenteur}"} {random2}");
             break;
         case '2':
-            Console.WriteLine(new Compte(1002, "Mme Création avec sold", 8008.02m).Description());
+            if (compte.PeutDéposer())
+                Console.WriteLine("** Peut déposer? Oui.");
+            else
+                Console.WriteLine("** Peut déposer? Non.");
             break;
         case '3':
-            Console.WriteLine(new Compte(1003, "Mme Création gelée", 1_111_111, StatutCompte.Gelé).Description());
+            if (compte.PeutRetirer())
+                Console.WriteLine("** Peut retirer? Oui.");
+            else
+                Console.WriteLine("** Peut retirer? Non.");
             break;
         case '4': // Déposer
             {
-                var compte = new Compte(1004, "M Déposer", 1000);
-                Console.WriteLine(" " + compte.PeutDéposer());
-                Console.WriteLine(" " + compte.PeutDéposer(1000));
-                Console.WriteLine();
-                compte.Déposer(1000);
-                Console.WriteLine(compte.Description());
+                decimal money = (decimal)Math.Round(Random.Shared.NextDouble() * 100, 2);
+
+                if (money < compte.Solde)
+                    Console.WriteLine($"** Peut retirer {money}? Oui.");
+                else
+                    Console.WriteLine($"** Peut retirer {money}? Non.");
             }
             break;
         case '5': // Retirer
             {
-                
+                decimal money = (decimal)Math.Round(Random.Shared.NextDouble() * 100, 2);
+                compte.Déposer(money);
+                Console.WriteLine($"** dépot de {money}$");
             }
             break;
         case '6': // Vider
             {
-                var compte = new Compte(1006, "M Vider", 15000);
-                Console.WriteLine(" " + (compte.Vider() == 15000));
-                Console.WriteLine("\n" + compte.Description());
+                decimal money = (decimal)Math.Round(Random.Shared.NextDouble() * 100, 2);
+                compte.Retirer(money);
+                Console.WriteLine($"** retrait de {money}$");
             }
             break;
-        case '7': // Geler et dégeler
+        case '7': // Geler 
             {
-                var compte = new Compte(1007, "MM Gel et Dégel", 7000);
-                compte.Geler();
-                Console.WriteLine(" " + !compte.PeutDéposer());
-                Console.WriteLine(" " + !compte.PeutRetirer());
-                Console.WriteLine("\n" + compte.Description());
-                compte.Dégeler();
-                Console.WriteLine("\n " + compte.PeutDéposer());
-                Console.WriteLine(" " + compte.PeutRetirer());
-                Console.WriteLine("\n" + compte.Description());
+                compte.Vider();
             }
             break;
-        case '8': // getters
+        case '8': 
             {
-                var compte = new Compte(1008, "Mme getters", 8000);
-                Console.WriteLine(compte.Description());
-                Console.WriteLine();
-                Console.WriteLine($"          Numéro: {compte.Numéro}");
-                Console.WriteLine($" Détenteur.trice: {compte.Détenteur}");
-                Console.WriteLine($"           Solde: {compte.Solde:C}");
-                Console.WriteLine($"          Statut: {compte.Statut}");
-                Console.WriteLine($"            Gelé: {compte.EstGelé}\n");
+                if (compte.Statut == StatutCompte.Gelé)
+                {
+                    Console.WriteLine("** Impossible de geler un compte deja geler");
+                }
+                else
+                {
+                    compte.Geler();
+                }
             }
             break;
         case '9': // setters
             {
-                var compte = new Compte(1008, "Mme setter", 9000);
-                compte.SetDétenteur("          Mme setter anglais        ");
-                Console.WriteLine($" {compte.Détenteur == "Mme setter anglais"}\n");
-                Console.WriteLine(compte.Description());
+                if (compte.Statut == StatutCompte.Ok)
+                {
+                    Console.WriteLine("** Impossible de degeler un compte deja degeler");
+                }
+                else
+                {
+                    compte.Dégeler();
+                }
             }
             break;
         case 'a':  // erreurs de constructions

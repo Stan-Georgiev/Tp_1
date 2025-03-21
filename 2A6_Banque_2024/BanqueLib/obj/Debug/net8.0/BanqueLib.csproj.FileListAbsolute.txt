@@ -10,3 +10,15 @@ C:\Users\2494186\Source\Repos\Tp_1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\Ba
 C:\Users\2494186\Source\Repos\Tp_1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\refint\BanqueLib.dll
 C:\Users\2494186\Source\Repos\Tp_1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\BanqueLib.pdb
 C:\Users\2494186\Source\Repos\Tp_1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\ref\BanqueLib.dll
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\bin\Debug\net8.0\BanqueLib.deps.json
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\bin\Debug\net8.0\BanqueLib.dll
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\bin\Debug\net8.0\BanqueLib.pdb
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\BanqueLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\BanqueLib.AssemblyInfoInputs.cache
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\BanqueLib.AssemblyInfo.cs
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\BanqueLib.csproj.CoreCompileInputs.cache
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\BanqueLib.sourcelink.json
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\BanqueLib.dll
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\refint\BanqueLib.dll
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\BanqueLib.pdb
+C:\Users\2494186\Desktop\Tp1\2A6_Banque_2024\BanqueLib\obj\Debug\net8.0\ref\BanqueLib.dll

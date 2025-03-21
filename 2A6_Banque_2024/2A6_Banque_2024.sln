@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BanqueLib", "BanqueLib\Banq
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTesterCompte", "ConsoleTesterCompte\ConsoleTesterCompte.csproj", "{6A837CAF-5BC2-400A-8687-F59F71845249}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleSimulerCompte", "ConsoleSimulerCompte\ConsoleSimulerCompte.csproj", "{CA7D74BC-DEEB-4D92-8282-95A461FB0298}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +23,15 @@ Global
 		{6A837CAF-5BC2-400A-8687-F59F71845249}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A837CAF-5BC2-400A-8687-F59F71845249}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A837CAF-5BC2-400A-8687-F59F71845249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA7D74BC-DEEB-4D92-8282-95A461FB0298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA7D74BC-DEEB-4D92-8282-95A461FB0298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA7D74BC-DEEB-4D92-8282-95A461FB0298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA7D74BC-DEEB-4D92-8282-95A461FB0298}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3A869C5-35D2-4985-A86B-B2EBD226473B}
 	EndGlobalSection
 EndGlobal

@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("ConsoleTesterCompte")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("ConsoleSimulerCompte")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb7ece2485d33199d92894960e5577812323bd04")]
-[assembly: System.Reflection.AssemblyProductAttribute("ConsoleTesterCompte")]
-[assembly: System.Reflection.AssemblyTitleAttribute("ConsoleTesterCompte")]
+[assembly: System.Reflection.AssemblyProductAttribute("ConsoleSimulerCompte")]
+[assembly: System.Reflection.AssemblyTitleAttribute("ConsoleSimulerCompte")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Généré par la classe MSBuild WriteCodeFragment.

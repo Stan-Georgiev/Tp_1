@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata;
+﻿using System.Data.SqlTypes;
+using System.Reflection.Metadata;
 
 namespace BanqueLib
 {
@@ -58,7 +59,7 @@ namespace BanqueLib
             affiche += $"[SG] *                                                        *\n";
             affiche += $"[SG] *  Compte: {Numéro,-12}                                  *\n";
             affiche += $"[SG] *  De: {Détenteur,-19}                               *\n";
-            affiche += $"[SG] *  Solde: {Solde, -13}                                  *\n";
+            affiche += $"[SG] *  Solde: {Solde, -13:c}                                  *\n";
             affiche += $"[SG] *  Statut: {Statut, -13}                                 *\n";
             affiche += $"[SG] **********************************************************\n";
             return affiche;
@@ -68,12 +69,9 @@ namespace BanqueLib
         {
             var arrondi = decimal.Round(montant, 2);
 
-
-            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(montant);
-            ArgumentOutOfRangeException.ThrowIfNotEqual(montant,arrondi);
-
             if (_EstGelé == true)
             {
+                Console.WriteLine($"** Impossible de déposer {arrondi}$");
                 return false;
             }
             else
@@ -86,12 +84,13 @@ namespace BanqueLib
         public bool PeutRetirer (decimal montant = 1)
         {
             var arrondi = decimal.Round(montant, 2);
+            decimal money = (decimal)Math.Round(Random.Shared.NextDouble() * 100, 2);
 
-            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(montant);
-            ArgumentOutOfRangeException.ThrowIfNotEqual(montant, arrondi);
 
-            if (_EstGelé == true || montant > _Solde)
+
+            if (_EstGelé == true || money > _Solde)
             {
+                Console.WriteLine($"** Impossible de retirer {money}$");
                 return false;
             }
             else
@@ -106,8 +105,7 @@ namespace BanqueLib
         {
             var arrondi = decimal.Round(montant, 2);
 
-            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(montant);
-            ArgumentOutOfRangeException.ThrowIfNotEqual(montant, arrondi);
+           
 
             if (PeutDéposer(montant))
             {
@@ -117,26 +115,24 @@ namespace BanqueLib
             }
             else
             {
-                throw new InvalidOperationException("Déposer");
+                return _Solde;
             }
         }
 
         public decimal Retirer(decimal Montant)
         {
             var arrondi = decimal.Round(Montant, 2);
-
-            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(Montant);
-            ArgumentOutOfRangeException.ThrowIfNotEqual(Montant, arrondi);
-
             if (PeutDéposer(Montant))
             {
                 _Solde -= Montant;
+                Console.WriteLine("** Peut retirer? Oui");
                 return _Solde;
 
             }
             else
             {
-                throw new InvalidOperationException("Montant");
+                Console.WriteLine("** Peut retirer? Non");
+                return _Solde;
             }
         }
 
@@ -147,39 +143,42 @@ namespace BanqueLib
         {
             if (_Solde == 0|| _Statut == StatutCompte.Gelé)
             {
-                throw new InvalidOperationException("Vider");
+                Console.WriteLine("** Impossible de vider un compte vide ou geler");
+                return Solde;
             }
             else
             {
                 decimal montant = _Solde;
                 _Solde -= montant;
+                Console.WriteLine($"Retrait complet de {montant}$");
                 return montant;
             }          
         }
 
         public void Geler()
         {
-            if (_Statut == StatutCompte.Gelé)
+            if (_EstGelé == true || _Statut == StatutCompte.Gelé)
             {
-                throw new InvalidOperationException("Geler");
+                Console.WriteLine("Impossible de geler un compte deja geler");
+            }
+            else
+            {
+                Console.WriteLine("** Le compte a été gelé");
             }
             _Statut = StatutCompte.Gelé;
-
-            if (_Statut == StatutCompte.Gelé)
-            {
-                _EstGelé = true;
-            }
+            _EstGelé = true;
+            
         }
 
         public void Dégeler()
         {
-            _Statut = StatutCompte.Ok;
-            _EstGelé = false; 
-
-            if (_Statut == StatutCompte.Ok)
+            
+            if (_EstGelé ==true)
             {
-                throw new InvalidOperationException("Dégeler");
+                Console.WriteLine("** Le compte a été dégelé");
             }
+            _Statut = StatutCompte.Ok;
+            _EstGelé = false;
         }
 
 
