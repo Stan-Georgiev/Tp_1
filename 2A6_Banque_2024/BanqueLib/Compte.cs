@@ -83,7 +83,6 @@ namespace BanqueLib
 
         public bool PeutRetirer (decimal montant = 1)
         {
-            var arrondi = decimal.Round(montant, 2);
             decimal money = (decimal)Math.Round(Random.Shared.NextDouble() * 100, 2);
 
 
@@ -122,7 +121,7 @@ namespace BanqueLib
         public decimal Retirer(decimal Montant)
         {
             var arrondi = decimal.Round(Montant, 2);
-            if (PeutDéposer(Montant))
+            if (PeutRetirer(Montant))
             {
                 _Solde -= Montant;
                 Console.WriteLine("** Peut retirer? Oui");

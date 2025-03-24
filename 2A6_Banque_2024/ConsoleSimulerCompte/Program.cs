@@ -67,9 +67,9 @@ while (true)
             break;
         case '6': // Vider
             {
-                decimal money = (decimal)Math.Round(Random.Shared.NextDouble() * 100, 2);
-                compte.Retirer(money);
-                Console.WriteLine($"** retrait de {money}$");
+                decimal montant = (decimal)Math.Round(Random.Shared.NextDouble() * 100, 2);
+                compte.Retirer(montant);
+                Console.WriteLine($"** retrait de {montant}$");
             }
             break;
         case '7': // Geler 
@@ -101,82 +101,12 @@ while (true)
                 }
             }
             break;
-        case 'a':  // erreurs de constructions
-            {
-                (string, string?)[] erreurs =
-                {
-                    Utile.ExceptMsg(() => new Compte(0, "Han")),
-                    Utile.ExceptMsg(() => new Compte(-1, "Han")),
-                    Utile.ExceptMsg(() => new Compte(1, null!)),
-                    Utile.ExceptMsg(() => new Compte(1, "")),
-                    Utile.ExceptMsg(() => new Compte(1, "    ")),
-                    Utile.ExceptMsg(() => new Compte(1, "Han", -1)),
-                    Utile.ExceptMsg(() => new Compte(1, "Han", 0.001m)),
-                };
-                foreach (var (excep, message) in erreurs)
-                    Console.WriteLine($"\n {excep}\n {message ?? ""}");
-            }
-            break;
-        case 'b':  // erreurs de setter
-            {
-                var ok = new Compte(1009, "Obiwan", 7000);
-                (string, string?)[] erreurs =
-                {
-                    Utile.ExceptMsg(() => ok.SetDétenteur(null!)),
-                    Utile.ExceptMsg(() => ok.SetDétenteur("")),
-                    Utile.ExceptMsg(() => ok.SetDétenteur("  ")),
-                };
-                foreach (var (excep, message) in erreurs)
-                    Console.WriteLine($"\n {excep}\n {message ?? ""}");
-            }
-            break;
-        case 'c':  // erreurs PeutRetirer, PeutDéposer
-            {
-                var ok = new Compte(1009, "Obiwan", 7000);
-                (string, string?)[] erreurs =
-                {
-                    Utile.ExceptMsg(() => ok.PeutDéposer(-1)),
-                    Utile.ExceptMsg(() => ok.PeutDéposer(1.001m)),
-                    Utile.ExceptMsg(() => ok.PeutRetirer(-1)),
-                    Utile.ExceptMsg(() => ok.PeutRetirer(1.001m)),
-                };
-                foreach (var (excep, message) in erreurs)
-                    Console.WriteLine($"\n {excep}\n {message ?? ""}");
-            }
-            break;
-        case 'd':  // erreurs de retrait et dépôt
-            {
-                var ok = new Compte(1009, "Obiwan", 7000);
-                var gelé = new Compte(1009, "Obiwan", 7000, StatutCompte.Gelé);
-                (string, string?)[] erreurs =
-                {
-                    Utile.ExceptMsg(() => ok.Déposer(1000.001m)),
-                    Utile.ExceptMsg(() => gelé.Déposer(1000)),
-                    Utile.ExceptMsg(() => ok.Retirer(8000)),
-                    Utile.ExceptMsg(() => ok.Retirer(1000.001m)),
-                    Utile.ExceptMsg(() => gelé.Retirer(1000)),
-                };
-                foreach (var (excep, message) in erreurs)
-                    Console.WriteLine($"\n {excep}\n {message ?? ""}");
-            }
-            break;
-        case 'e':  // erreurs pour geler, dégeler et vider
-            {
-                var ok = new Compte(1009, "Obiwan", 0);
-                var gelé = new Compte(1009, "Obiwan", 10, StatutCompte.Gelé);
-                (string, string?)[] erreurs =
-                {
-                    Utile.ExceptMsg(() => ok.Dégeler()),
-                    Utile.ExceptMsg(() => gelé.Geler()),
-                    Utile.ExceptMsg(() => ok.Vider()),
-                    Utile.ExceptMsg(() => gelé.Vider()),
-                };
-                foreach (var (excep, message) in erreurs)
-                    Console.WriteLine($"\n {excep}\n {message ?? ""}");
-            }
-            break;
-        case 'q':
+        case 'a':
             Environment.Exit(0); break;
+        case 'b':
+            compte = new Compte(random, "---", 0, StatutCompte.Ok, false);
+            Console.WriteLine("Un nouveau compte a été créé");
+            break;
         default:
             Console.WriteLine(" Mauvais choix"); break;
     }
