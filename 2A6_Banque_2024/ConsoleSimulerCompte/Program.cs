@@ -1,11 +1,35 @@
 ﻿using System.Numerics;
+using System.Text.Json;
 using BanqueLib;
 
 int random = Random.Shared.Next(100, 999);
 int random2 = Random.Shared.Next(1, 99);
 var compte = new Compte(random,"---",0,StatutCompte.Ok,false);
+Déserialize();
+
+
+
+void Déserialize()
+{
+    const string datafile = "Compte.json";
+    string contenuJson = File.ReadAllText(datafile);
+
+    compte = JsonSerializer.Deserialize<Compte>(contenuJson);
+}
+
+
 while (true)
 {
+
+     void Serializer(Compte compte)
+     {
+        const string datafile = "Compte.json";
+
+        File.WriteAllText(datafile, JsonSerializer.Serialize(compte, new JsonSerializerOptions { WriteIndented = true }));
+     }
+
+    
+
     Console.Clear();
     Console.WriteLine(compte.Description());
     Console.WriteLine(
@@ -67,9 +91,9 @@ while (true)
             break;
         case '6': // Vider
             {
-                decimal montant = (decimal)Math.Round(Random.Shared.NextDouble() * 100, 2);
-                compte.Retirer(montant);
-                Console.WriteLine($"** retrait de {montant}$");
+                decimal money = (decimal)Math.Round(Random.Shared.NextDouble() * 100, 2);
+                compte.Retirer(money);
+                Console.WriteLine($"** retrait de {money}$");
             }
             break;
         case '7': // Geler 
@@ -102,9 +126,13 @@ while (true)
             }
             break;
         case 'a':
-            Environment.Exit(0); break;
+            Serializer(compte);
+            Environment.Exit(1000);
+            break;
+
         case 'b':
             compte = new Compte(random, "---", 0, StatutCompte.Ok, false);
+            
             Console.WriteLine("Un nouveau compte a été créé");
             break;
         default:
@@ -130,3 +158,6 @@ static class Utile
         }
     }
 }
+
+
+

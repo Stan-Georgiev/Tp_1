@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlTypes;
 using System.Reflection.Metadata;
+using System.Text.Json;
 
 namespace BanqueLib
 {
@@ -87,7 +88,7 @@ namespace BanqueLib
 
 
 
-            if (_EstGelé == true || money > _Solde)
+            if (_EstGelé == true || money >= _Solde)
             {
                 Console.WriteLine($"** Impossible de retirer {money}$");
                 return false;
@@ -121,9 +122,9 @@ namespace BanqueLib
         public decimal Retirer(decimal Montant)
         {
             var arrondi = decimal.Round(Montant, 2);
-            if (PeutRetirer(Montant))
+            if (PeutRetirer(arrondi))
             {
-                _Solde -= Montant;
+                _Solde -= arrondi;
                 Console.WriteLine("** Peut retirer? Oui");
                 return _Solde;
 
@@ -179,11 +180,7 @@ namespace BanqueLib
             _Statut = StatutCompte.Ok;
             _EstGelé = false;
         }
-
-
         #endregion
-
-
 
     }
 }
